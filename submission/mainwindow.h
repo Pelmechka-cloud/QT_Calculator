@@ -1,10 +1,7 @@
 #pragma once
 
 #include "calculator.h"
-
 #include <QMainWindow>
-#include <QLabel>
-#include <QPushButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,13 +22,15 @@ private slots:
     void OnSignClicked();
     void OnBackspaceClicked();
     void OnClearClicked();
-
-    void OnOperationClicked();
     void OnEqualsClicked();
-
     void OnMCClicked();
     void OnMRClicked();
     void OnMSClicked();
+    void OnAddClicked();
+    void OnSubClicked();
+    void OnMulClicked();
+    void OnDivClicked();
+    void OnPowClicked();
 
 private:
     enum class Operation {
@@ -43,23 +42,18 @@ private:
         POWER
     };
 
-    void SetupUI();
     void SetText(const QString& text);
     void AddText(const QString& suffix);
     void SetOperation(Operation op);
     QString OpToString(Operation op) const;
 
     Ui::MainWindow* ui;
-
-    QLabel* l_memory = nullptr;
-    QLabel* l_result = nullptr;
-    QLabel* l_formula = nullptr;
-
     QString input_number_;
     Number active_number_ = 0.0;
     Calculator calculator_;
     Operation current_operation_ = Operation::NO_OPERATION;
-
     Number memory_ = 0.0;
     bool has_memory_ = false;
+    Operation last_operation_ = Operation::NO_OPERATION;
+    Number last_operand_ = 0.0;
 };
